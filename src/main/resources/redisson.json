@@ -9,7 +9,7 @@
 		"password": null,
 		"subscriptionsPerConnection": 5,
 		"clientName": null,
-		"address": "redis://localhost:10001",
+		"address": "redis://47.104.65.176:10001",
 		"subscriptionConnectionMinimumIdleSize": 1,
 		"subscriptionConnectionPoolSize": 50,
 		"connectionMinimumIdleSize": 32,
