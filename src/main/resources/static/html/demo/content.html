@@ -1,0 +1,128 @@
+
+<div class="panel panel-default">
+	<div class="panel-body">
+		<div class="row" style="height:50px;" >
+			<form class="form-inline" role="form">
+			  <div class="form-group col-xs-6">
+				<input type="text" class="form-control" id="firstname" placeholder="请输入名称">
+			  </div>
+			  <div class="col-xs-6">
+					<button class="btn btn-primary btn-sm" id="searchBtn">查询</button>
+					<button class="btn btn-sm" id="resetBtn">重置</button>
+			  </div>
+			</form>
+		</div>
+		<div class="table-responsive" id="contentTable" >
+			<table id="sample-table-2" class="table table-striped table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>编号</th>
+						<th>名称</th>
+						<th class="hidden-480">价格</th>
+
+						<th>销售量 </th>
+						<th>库存 </th>
+						<th>规格</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr v-for="row in list" >
+						<td>
+							<a href="#">{{row.no}}</a>
+						</td>
+						<td>{{row.name}}</td>
+						<td>{{row.price}}</td>
+						<td>{{row.sales}}</td>
+						<td>{{row.stockNum}}</td>
+						<td>{{row.prop}}</td>
+					</tr>
+				</tbody>
+			</table>
+			<div ><div class="col-sm-6">
+			<div class="dataTables_info" role="alert">显示 {{pager.start}} 到 {{pager.end}} 条/总数 {{pager.total}} </div>
+			</div>
+			<div class="col-sm-6">
+				<div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
+					<ul class="pagination">
+						<li class="paginate_button previous" v-bind:class="{'disabled' : 1 == pager.curpage}" ><a href="javascript:void(0)" v-on:click="goPage(-1)" >Previous</a></li>
+						<li class="paginate_button " v-for="n in pager.pages" v-bind:class="{'active' : n == pager.curpage}" ><a href="javascript:void(0)" v-on:click="toPage(n)" >{{n}}</a></li>
+						<li class="paginate_button next" v-bind:class="{'disabled' : pager.pages == pager.curpage}" ><a href="javascript:void(0)" v-on:click="goPage(1)" >Next</a></li>
+					</ul>
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+ <!-- DATA TABLE SCRIPTS -->
+<script src="../../../../assets/js/dataTables/jquery.dataTables.js"></script>
+<script src="../../../../assets/js/dataTables/dataTables.bootstrap.js"></script>
+<script>
+new Vue({
+	el:"#contentTable",
+	data:{
+		pager:{
+			start:1,
+			end:10,
+			total:57,
+			curpage:2,
+			pages:5,
+		},
+		list:[
+			{
+				no:"10000011",
+				name:"儿童礼物",
+				price:"17.8",
+				sales:"100",
+				stockNum:"100",
+				prop:"黄色"
+			},
+			{
+				no:"10000011",
+				name:"儿童礼物",
+				price:"17.8",
+				sales:"100",
+				stockNum:"100",
+				prop:"黄色"
+			},
+			{
+				no:"10000011",
+				name:"儿童礼物",
+				price:"17.8",
+				sales:"100",
+				stockNum:"100",
+				prop:"黄色"
+			},
+			{
+				no:"10000011",
+				name:"儿童礼物",
+				price:"17.8",
+				sales:"100",
+				stockNum:"100",
+				prop:"黄色"
+			}
+		]
+	},
+	methods:{
+		goPage:function(z){
+			var p = this.pager.curpage;
+			p += z;
+			if ( p <= 0){
+				p = 1;
+			}
+			if ( p >= this.pager.pages){
+				p = this.pager.pages;
+			}
+			
+			this.pager.curpage = p;
+		},
+		toPage:function(z){			
+			this.pager.curpage = z;
+		}
+	}
+});
+
+
+</script>
